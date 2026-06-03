@@ -30,6 +30,10 @@
             padding: 0 15px;
             box-sizing: border-box;
             z-index: 10000;
+            transition: background 0.15s ease;
+        }
+        #taskbar.solid {
+            background: rgb(20, 20, 20);
         }
         #clock {
             color: white;
@@ -202,6 +206,7 @@
         const titleBar = document.getElementById("titleBar");
         if (titleBar) {
           titleBar.addEventListener("mousedown", (e) => {
+            if (isMaximized) return;
             isDragging = true;
             globalDragging = true;
             offsetX = e.clientX - testWindow.offsetLeft;
