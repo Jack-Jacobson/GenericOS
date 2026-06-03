@@ -75,7 +75,7 @@
             left: 100px;
             width: 200px;
             height: 150px;
-            background: rgba(30,30,30,0.9);
+            background: rgba(30,30,30);
             color: white;
             border-radius: 8px;
             padding: 10px;
@@ -85,13 +85,67 @@
             display: none;
             z-index: 100;
         }
+        #test-window.maximized {
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            border-radius: 0;
+        }
+        #controls button {
+            background: transparent;
+            border: none;
+            color: white;
+            width: 24px;
+            height: 24px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+        #controls button:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 4px;
+        }
+        #titleBar {
+            height: 30px;
+            background: rgba(0,0,0,0.6);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 6px;
+            cursor: grab;
+        }
+        #controls button{
+            background: transparent;
+            border: none;
+            color: white;
+            width: 24px;
+            height: 24px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+        #controls button:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 4px;
+        }
+        #contents {
+            padding: 10px;
+            height: calc(100% - 30px);
+        }
     </style>
 </head>
 <body>
     <div id="desktop">
 
         <div id="test-window"> 
-            drag me
+            <div id="titleBar">
+                <div id="title">Test Window</div>
+                
+                <div id="controls">
+                    <button id="min-btn">–</button>
+                    <button id="max-btn">□</button>
+                    <button id="close-btn">✕</button>
+                </div>
+            </div>
         </div>
 
         <div id="notepad-icon">
@@ -145,13 +199,16 @@
             testWindow.style.display = "block";
         });
 
-        testWindow.addEventListener("mousedown", (e) => {
+        const titleBar = document.getElementById("titleBar");
+        if (titleBar) {
+          titleBar.addEventListener("mousedown", (e) => {
             isDragging = true;
             globalDragging = true;
             offsetX = e.clientX - testWindow.offsetLeft;
             offsetY = e.clientY - testWindow.offsetTop;
             testWindow.style.cursor = "grabbing";
-        });
+          });
+        }
 
         document.addEventListener("mousemove", (e) => {
             if (!isDragging) return;
@@ -183,6 +240,53 @@
         });
         document.addEventListener("mouseup", () =>{
             document.body.classList.remove("dragging");
+        });
+
+        //window button control
+        const win = document.getElementById("test-window");
+
+        const minBtn = document.getElementById("min-btn");
+        const maxBtn = document.getElementById("max-btn");
+        const closeBtn = document.getElementById("close-btn");
+
+        let isMaximized = false;
+        let prevState = {
+            width: win.style.width,
+            height: win.style.height,
+            left: win.style.left,
+            top: win.style.top
+        };
+
+        closeBtn.addEventListener("click", () => {
+            win.style.display = "none";
+        });
+        minBtn.addEventListener("click", () => {
+            win.style.display = "none";
+        });
+        maxBtn.addEventListener("click", () => {
+            if (!isMaximized) {
+                prevState = {
+                    width: win.style.width,
+                    height: win.style.height,
+                    left: win.style.left,
+                    top: win.style.top
+                };
+                win.style.width = "100vw";
+                win.style.height = "calc(100vh - 50px)";
+                win.style.left = "0";
+                win.style.top = "0";
+
+                win.classList.add("maximized");
+
+            } else {
+                win.style.width = prevState.width;
+                win.style.height = prevState.height;
+                win.style.left = prevState.left;
+                win.style.top = prevState.top;
+
+                win.classList.remove("maximized");
+            }
+            isMaximized = !isMaximized;
         });
 
     </script>
