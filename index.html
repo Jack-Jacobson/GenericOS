@@ -135,14 +135,25 @@
             testWindow.style.cursor = "grabbing";
         });
 
-        testWindow.addEventListener("mousemove", (e) => {
-            if(isDragging){
-                testWindow.style.left = `${e.clientX - offsetX}px`;
-                testWindow.style.top = `${e.clientY - offsetY}px`;
-            }
+        document.addEventListener("mousemove", (e) => {
+            if (!isDragging) return;
+
+            const maxX = window.innerWidth - testWindow.offsetWidth;
+            const maxY = window.innerHeight - testWindow.offsetHeight;
+
+            const nextX = e.clientX - offsetX;
+            const nextY = e.clientY - offsetY;
+
+            const clampedX = Math.max(0, Math.min(nextX, maxX));
+            const clampedY = Math.max(0, Math.min(nextY, maxY));
+
+            testWindow.style.left = `${clampedX}px`;
+            testWindow.style.top = `${clampedY}px`;
+
+        
         });
 
-        testWindow.addEventListener("mouseup", () => {
+        document.addEventListener("mouseup", () => {
             isDragging = false;
             testWindow.style.cursor = "grab";
         });
