@@ -14,6 +14,7 @@
             background-position: center;
             background-repeat: no-repeat;
             position: relative;
+            z-index: 0;
         }
         #taskbar {
             position: absolute;
@@ -28,6 +29,7 @@
             justify-content: space-between;
             padding: 0 15px;
             box-sizing: border-box;
+            z-index: 10000;
         }
         #clock {
             color: white;
@@ -44,6 +46,7 @@
             height: 60px;
             display: block;
             margin: 0 auto 5px auto;
+            z-index: 10;
         }
         #notepad-icon {
             position: absolute;
@@ -57,8 +60,14 @@
             text-align: center;
             cursor: pointer;
             user-select: none;
-            background: rgba(0, 0, 0, 0.25);
+            background: transparent;
             border-radius: 8px;
+            border: 1px solid transparent;;
+            transition: background 0.15s ease, border 0.15s ease;
+        }
+        body:not(.dragging) #notepad-icon:hover{
+            background: rgba(54, 52, 52, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
         }
         #test-window {
             position: absolute;
@@ -73,6 +82,8 @@
             font-family: sans-serif;
             cursor: grab;
             user-select: none;
+            display: none;
+            z-index: 100;
         }
     </style>
 </head>
@@ -123,13 +134,20 @@
 
         //draggable window
         const testWindow = document.getElementById("test-window");
+        const notepadIcon = document.getElementById("notepad-icon");
 
         let offsetX = 0;
         let offsetY = 0;
         let isDragging = false;
+        let globalDragging = false;
+
+        notepadIcon.addEventListener("click", () => {
+            testWindow.style.display = "block";
+        });
 
         testWindow.addEventListener("mousedown", (e) => {
             isDragging = true;
+            globalDragging = true;
             offsetX = e.clientX - testWindow.offsetLeft;
             offsetY = e.clientY - testWindow.offsetTop;
             testWindow.style.cursor = "grabbing";
@@ -155,7 +173,16 @@
 
         document.addEventListener("mouseup", () => {
             isDragging = false;
+            globalDragging = false;
             testWindow.style.cursor = "grab";
+        });
+
+        //prevent icon highlight when dragging
+        document.addEventListener("mousedown", () =>{
+            document.body.classList.add("dragging");
+        });
+        document.addEventListener("mouseup", () =>{
+            document.body.classList.remove("dragging");
         });
 
     </script>
