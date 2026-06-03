@@ -14,7 +14,6 @@
             background-position: center;
             background-repeat: no-repeat;
             position: relative;
-            
         }
         #taskbar {
             position: absolute;
@@ -61,10 +60,29 @@
             background: rgba(0, 0, 0, 0.25);
             border-radius: 8px;
         }
+        #test-window {
+            position: absolute;
+            top: 100px;
+            left: 100px;
+            width: 200px;
+            height: 150px;
+            background: rgba(30,30,30,0.9);
+            color: white;
+            border-radius: 8px;
+            padding: 10px;
+            font-family: sans-serif;
+            cursor: grab;
+            user-select: none;
+        }
     </style>
 </head>
 <body>
     <div id="desktop">
+
+        <div id="test-window"> 
+            drag me
+        </div>
+
         <div id="notepad-icon">
             <img src="assets/notepad-icon.png" />
             <div>Notepad</div>
@@ -97,11 +115,38 @@
             seconds = seconds.toString().padStart(2, '0');
 
             document.getElementById("clock").textContent = `${hours}:${minutes}:${seconds} ${ampm}`;
-
+        
         }
 
         updateClock();
         setInterval(updateClock, 1000);
+
+        //draggable window
+        const testWindow = document.getElementById("test-window");
+
+        let offsetX = 0;
+        let offsetY = 0;
+        let isDragging = false;
+
+        testWindow.addEventListener("mousedown", (e) => {
+            isDragging = true;
+            offsetX = e.clientX - testWindow.offsetLeft;
+            offsetY = e.clientY - testWindow.offsetTop;
+            testWindow.style.cursor = "grabbing";
+        });
+
+        testWindow.addEventListener("mousemove", (e) => {
+            if(isDragging){
+                testWindow.style.left = `${e.clientX - offsetX}px`;
+                testWindow.style.top = `${e.clientY - offsetY}px`;
+            }
+        });
+
+        testWindow.addEventListener("mouseup", () => {
+            isDragging = false;
+            testWindow.style.cursor = "grab";
+        });
+
     </script>
 </body>
 </html>
