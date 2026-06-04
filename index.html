@@ -74,6 +74,34 @@
             background: rgba(54, 52, 52, 0.1);
             border: 1px solid rgba(255, 255, 255, 0.2);
         }
+        #terminal-icon {
+            position: absolute;
+            top: 20px;
+            left: 120px;
+            width: 80px;
+            padding: 10px;
+            color: white;
+            font-family: sans-serif;
+            font-size: 16px;
+            text-align: center;
+            cursor: pointer;
+            user-select: none;
+            background: transparent;
+            border-radius: 8px;
+            border: 1px solid transparent;;
+            transition: background 0.15s ease, border 0.15s ease;
+        }
+        body:not(.dragging) #terminal-icon:hover{
+            background: rgba(54, 52, 52, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        #terminal-icon img{
+            width: 60px;
+            height: 60px;
+            display: block;
+            margin: 0 auto 5px auto;
+            z-index: 10;
+        }
         #controls {
             display: flex;
             gap: 2px;
@@ -150,7 +178,7 @@
             color: white;
             border: none;
             padding: 10px;
-            font-family: monospace;
+            font-family: sans-serif;
             font-size: 14px;
             resize: none;
             outline: none;
@@ -164,11 +192,91 @@
             background: rgba(255, 255, 255, 0.9);
             margin: 0 15px;
         }
+        #boot-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background-image: url('assets/loading-screen.jpeg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            opacity: 1;
+            animation: bootFadeOut 3.5s ease-out forwards;
+            z-index: 9999899;
+        }
+        @keyframes bootFadeOut {
+            0% { opacity: 1; }
+            100% { opacity: 0;}
+        }
+        #terminal-window {
+            position: absolute;
+            top: 100px;
+            left: 150px;
+            width: 600px;
+            height: 400px;
+            background: rgba(0,0,0,0.95);
+            color: #00ff00;
+            border-radius: 8px;
+            padding: 0;
+            font-family: monospace;
+            user-select: none;
+            display: none;
+            z-index: 100;
+            box-sizing: border-box;
+            flex-direction: column;
+        }
+        #terminal-window.maximized {
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: calc(100vh-50px);
+            border-radius: 0;
+            cursor: default;
+        }
+        #terminal-titleBar {
+            height: 30px;
+            background: rgba(0,0,0,0.8);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-left: 8px;
+            padding-right: 8px;
+            cursor: grab;
+            box-sizing: border-box;
+            border-bottom: 1px solid rgba(0, 255, 0, 0.2)
+        }
+        #terminal-controls{
+            display: flex;
+            gap: 2px;
+        }
+        #terminal-controls button{
+            background: transparent;
+            border: npne;
+            color: #00ff00;
+            width: 24px;
+            height: 24px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+        #terminal-controls button:hover{
+            background: rgba(0, 255, 0, 0.1);
+            border-radius: 4px;
+        }
+        #terminal-content {
+            flex: 1;
+            background: rgba(0, 255, 0, 0.1);
+            color: #00ff00;
+            padding: 10px;
+            overflow: auto;
+            font-size: 14px;
+        }
     </style>
 </head>
 <body>
     <div id="desktop">
-
+        <div id="boot-screen"> </div>
         <div id="notepad-window"> 
             <div id="notepad-titleBar">
                 <div id="notepad-title">Notepad</div>
@@ -186,8 +294,22 @@
             <img src="assets/notepad-icon.png" />
             <div>Notepad</div>
         </div>
+        <div id = "terminal-window">
+            <div id="terminal-titleBar">
+                <div id="terminal-title">Terminal</div>
 
-
+                <div id="terminal-controls">
+                    <button id="terminal-min-btn">–</button>
+                    <button id="terminal-max-btn">□</button>
+                    <button id="terminal-close-btn">✕</button>
+                </div>
+            </div>
+            <div id="terminal-content"></div>
+        </div>
+        <div id="terminal-icon">
+            <img src="assets/terminal-icon.png" />
+            <div>Terminal</div>
+        </div>
         <div id="taskbar">
             <div id="os-text">GenericOS</div>
             <div id="taskbar-seperator"></div>
@@ -254,8 +376,13 @@
         document.addEventListener("mousemove", (e) => {
             if (!isDragging) return;
 
-            const maxX = window.innerWidth - notepadWindow.offsetWidth;
-            const maxY = window.innerHeight - notepadWindow.offsetHeight;
+            let activeWindow = notepadWindow;
+            if(terminalWindow.style.cursor === "grabbing"){
+                activeWindow = terminalWindow;
+            }
+
+            const maxX = window.innerWidth - activeWindow.offsetWidth;
+            const maxY = window.innerHeight - activeWindow.offsetHeight;
 
             const nextX = e.clientX - offsetX;
             const nextY = e.clientY - offsetY;
@@ -263,8 +390,8 @@
             const clampedX = Math.max(0, Math.min(nextX, maxX));
             const clampedY = Math.max(0, Math.min(nextY, maxY));
 
-            notepadWindow.style.left = `${clampedX}px`;
-            notepadWindow.style.top = `${clampedY}px`;
+            activeWindow.style.left = `${clampedX}px`;
+            activeWindow.style.top = `${clampedY}px`;
 
         
         });
@@ -273,6 +400,7 @@
             isDragging = false;
             globalDragging = false;
            notepadWindow.style.cursor = "";
+           terminalWindow.style.cursor = "";
         });
 
         //prevent icon highlight when dragging
@@ -380,8 +508,117 @@
             if (item) item.remove();
         }
 
+        //boot screen fade out
+        setTimeout (() => {
+            const bootScreen = document.getElementById("boot-screen");
+            if(bootScreen) {
+                bootScreen.remove();
+            }
+        }, 3500);
         
+        //terminal window
+        const terminalWindow = document.getElementById("terminal-window");
+        const terminalIcon = document.getElementById("terminal-icon");
+        const terminalTitleBar = document.getElementById("terminal-titleBar");
+        const terminalMinBtn = document.getElementById("terminal-min-btn");
+        const terminalMaxBtn = document.getElementById("terminal-max-btn");
+        const terminalCloseBtn = document.getElementById("terminal-close-btn");
+        let terminalMaximized = false;
+        let terminalPrevState  = {
+            width: terminalWindow.style.width,
+            height: terminalWindow.style.height,
+            left: terminalWindow.style.left,
+            top: terminalWindow.style.top
+        }
+        
+        terminalIcon.addEventListener("click", () => {
+            terminalWindow.style.display = "flex";
+            addTerminalToTaskbar();
+        });
 
+        if(terminalTitleBar){
+            terminalTitleBar.addEventListener("mousedown", (e) => {
+                if(terminalMaximized) return;
+                isDragging= true;
+                globalDragging = true;
+                offsetX = e.clientX-terminalWindow.offsetLeft;
+                offsetY = e.clientY-terminalWindow.offsetTop;
+                terminalWindow.style.cursor="grabbing";
+            });
+        }
+        terminalCloseBtn.addEventListener("click", () => {
+            terminalWindow.style.display = "none";
+            removeTerminalFromTaskbar();
+        });
+        terminalMinBtn.addEventListener("click", () => {
+            terminalWindow.style.display = "none";
+            if(!document.getElementById("taskbar-terminal")) addTerminalToTaskbar();
+        });
+        terminalMaxBtn.addEventListener("click", () => {
+            if(!terminalMaximized){
+                terminalPrevState  = {
+                    width: terminalWindow.style.width,
+                    height: terminalWindow.style.height,
+                    left: terminalWindow.style.left,
+                    top: terminalWindow.style.top
+                };
+                terminalWindow.style.width = "100vw";
+                terminalWindow.style.height = "calc(100vh-50px)";
+                terminalWindow.style.left  = "0";
+                terminalWindow.style.top = "0";
+                terminalWindow.style.display = "flex";
+
+                terminalWindow.classList.add("maximized");
+                taskbar.classList.add("solid");
+            }
+            else{
+                terminalWindow.style.width=terminalPrevState.width;
+                terminalWindow.style.height=terminalPrevState.height;
+                terminalWindow.style.left=terminalPrevState.left;
+                terminalWindow.style.top=terminalPrevState.top;
+                terminalWindow.style.display = "flex";
+            }
+            terminalMaximized = !terminalMaximized;
+        });
+        
+        //terminal taskbar managment
+        function addTerminalToTaskbar() {
+            const taskbarItems = document.getElementById("taskbar-items");
+            if(document.getElementById("taskbar-terminal")) return;
+
+            const item = document.createElement("button");
+            item.id = "taskbar-terminal";
+            item.style.cursor = "pointer";
+            item.style.background = "none";
+            item.style.border = "none";
+            item.style.padding = "0";
+            item.style.margin = "0 5px";
+
+            const img = document.createElement("img");
+            img.src="assets/terminal-icon.png";
+            img.style.width="40px";
+            img.style.height="40px";
+
+            item.addEventListener("mouseenter", () => {
+                item.style.background = "rgba(0,255,0,0.1)";
+                item.style.borderRadius = "4px";
+                item.style.border = "1px solid rgba(0,255,0,0.2)";
+            });
+
+            item.addEventListener("click", () => {
+                if(terminalWindow.style.display === "none"){
+                    terminalWindow.style.display = "flex";
+                } else {
+                    terminalWindow.style.display = "none";
+                }
+            });
+            item.appendChild(img);
+            taskbarItems.appendChild(item);
+        }
+        function removeTerminalFromTaskbar(){
+            const item = document.getElementById("taskbar-terminal");
+            if(item)item.remove();
+        }
     </script>
 </body>
 </html>
