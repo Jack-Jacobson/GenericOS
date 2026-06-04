@@ -26,7 +26,7 @@
             border-top: 1px solid rgba(255, 255, 255, 0.1);
             display: flex;
             align-items: center;
-            justify-content: space-between;
+            justify-content: flex-start;
             padding: 0 15px;
             box-sizing: border-box;
             z-index: 10000;
@@ -39,6 +39,7 @@
             color: white;
             font-family: sans-serif;
             font-size: 14px;
+            margin-left: auto;
         }
         #os-text {
             color: white;
@@ -139,6 +140,12 @@
             padding: 10px;
             height: calc(100% - 30px);
         }
+        #taskbar-seperator{
+            width: 2px;
+            height: 30px;
+            background: rgba(255, 255, 255, 0.9);
+            margin: 0 15px;
+        }
     </style>
 </head>
 <body>
@@ -164,6 +171,8 @@
 
         <div id="taskbar">
             <div id="os-text">GenericOS</div>
+            <div id="taskbar-seperator"></div>
+            <div id="taskbar-items"></div>
             <div id="clock"></div>
         </div>
     </div>
@@ -208,6 +217,7 @@
 
         notepadIcon.addEventListener("click", () => {
             testWindow.style.display = "block";
+            addToTaskbar();
         });
 
         const titleBar = document.getElementById("titleBar");
@@ -271,6 +281,7 @@
 
         closeBtn.addEventListener("click", () => {
             win.style.display = "none";
+            removeFromTaskbar();
         });
         minBtn.addEventListener("click", () => {
             win.style.display = "none";
@@ -302,6 +313,52 @@
             }
             isMaximized = !isMaximized;
         });
+
+        //taskbar icon funcs
+        function addToTaskbar() {
+            const taskbarItems = document.getElementById("taskbar-items");
+            if (document.getElementById("taskbar-notepad")) return; 
+
+            const item = document.createElement("button");
+            item.id = "taskbar-notepad";
+            item.style.cursor = "pointer";
+            item.style.background = "none";
+            item.style.border = "none";
+            item.style.padding = "0";
+            item.style.margin = "0 5px";
+
+            const img = document.createElement("img");
+            img.src = "assets/notepad-icon.png";
+            img.style.width = "40px";
+            img.style.height = "40px";
+            
+            item.addEventListener("mouseenter", () => {
+                item.style.background = "rgba(54, 52, 52, 0.1)";
+                item.style.borderRadius = "4px";
+                item.style.border = "1px solid rgba(255, 255, 255, 0.2)";
+            });
+
+            item.addEventListener("mouseleave", () => {
+                item.style.background = "none";
+                item.style.borderRadius = "none";
+                item.style.border = "none";
+            });
+
+            item.addEventListener("click", () => {
+                if (testWindow.style.display === "none") {
+                    testWindow.style.display = "block";
+                } else {
+                    testWindow.style.display = "none";
+                }
+            });
+
+            item.appendChild(img);
+            taskbarItems.appendChild(item);
+        };
+        function removeFromTaskbar() {
+            const item = document.getElementById("taskbar-notepad");
+            if (item) item.remove();
+        }
 
         
 
