@@ -73,6 +73,10 @@
             background: rgba(54, 52, 52, 0.1);
             border: 1px solid rgba(255, 255, 255, 0.2);
         }
+        #controls {
+            display: flex;
+            gap: 2px;
+        }
         #test-window {
             position: absolute;
             top: 100px;
@@ -84,26 +88,24 @@
             border-radius: 8px;
             padding: 10px;
             font-family: sans-serif;
-            cursor: grab;
             user-select: none;
             display: none;
             z-index: 100;
+            box-sizing: border-box;
         }
         #test-window.maximized {
             top: 0;
             left: 0;
             width: 100vw;
-            height: 100vh;
+            height: calc(100vh - 50px);
             border-radius: 0;
+            cursor: default;
         }
-        #controls button {
-            background: transparent;
-            border: none;
-            color: white;
-            width: 24px;
-            height: 24px;
+        #test-window.maximized #titleBar {
+            cursor: default;
+        }
+        #test-window.maximized #controls button{
             cursor: pointer;
-            font-size: 14px;
         }
         #controls button:hover {
             background: rgba(255, 255, 255, 0.1);
@@ -115,8 +117,10 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 0 6px;
+            padding-left: 8px;
+            padding-right: 8px;
             cursor: grab;
+            box-sizing: border-box;
         }
         #controls button{
             background: transparent;
@@ -167,6 +171,9 @@
         //wallpaper
         document.getElementById("desktop").style.backgroundImage = "url('assets/wallpaper.jpeg')";
     
+        //Maximize taskbar fix
+        const taskbar = document.getElementById("taskbar");
+
         //clock
         function updateClock() {
             const now = new Date();
@@ -236,7 +243,7 @@
         document.addEventListener("mouseup", () => {
             isDragging = false;
             globalDragging = false;
-            testWindow.style.cursor = "grab";
+           testWindow.style.cursor = "";
         });
 
         //prevent icon highlight when dragging
@@ -282,6 +289,7 @@
                 win.style.top = "0";
 
                 win.classList.add("maximized");
+                taskbar.classList.add("solid");
 
             } else {
                 win.style.width = prevState.width;
@@ -290,9 +298,12 @@
                 win.style.top = prevState.top;
 
                 win.classList.remove("maximized");
+                taskbar.classList.remove("solid");
             }
             isMaximized = !isMaximized;
         });
+
+        
 
     </script>
 </body>
