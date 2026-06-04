@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>OS</title>
+    <title>GenericOS</title>
     <style>
         body {
             margin: 0;
@@ -76,8 +76,8 @@
         }
         #terminal-icon {
             position: absolute;
-            top: 20px;
-            left: 120px;
+            top: 120px;
+            left: 20px;
             width: 80px;
             padding: 10px;
             color: white;
@@ -231,7 +231,7 @@
             top: 0;
             left: 0;
             width: 100vw;
-            height: calc(100vh-50px);
+            height: calc(100vh - 50px);
             border-radius: 0;
             cursor: default;
         }
@@ -253,8 +253,8 @@
         }
         #terminal-controls button{
             background: transparent;
-            border: npne;
-            color: #00ff00;
+            border: none;
+            color: white;
             width: 24px;
             height: 24px;
             cursor: pointer;
@@ -357,6 +357,12 @@
         let globalDragging = false;
 
         notepadIcon.addEventListener("click", () => {
+            notepadWindow.style.width = "600px";
+            notepadWindow.style.height = "400px";
+            notepadWindow.style.top = "50px";
+            notepadWindow.style.left = "100px";
+            notepadWindow.classList.remove("maximized");
+            isMaximized = false;
             notepadWindow.style.display = "flex";
             addToTaskbar();
         });
@@ -427,6 +433,10 @@
         };
 
         closeBtn.addEventListener("click", () => {
+            if(isMaximized){
+                taskbar.classList.remove("solid");
+                isMaximized = false;
+            }
             notepadWindow.style.display = "none";
             removeFromTaskbar();
         });
@@ -495,8 +505,10 @@
             item.addEventListener("click", () => {
                 if (notepadWindow.style.display === "none") {
                     notepadWindow.style.display = "flex";
+                    if(isMaximized) taskbar.classList.add("solid");
                 } else {
                     notepadWindow.style.display = "none";
+                    if(isMaximized) taskbar.classList.remove("solid");
                 }
             });
 
@@ -532,6 +544,12 @@
         }
         
         terminalIcon.addEventListener("click", () => {
+            terminalWindow.style.width = "600px";
+            terminalWindow.style.height = "400px";
+            terminalWindow.style.top = "100px";
+            terminalWindow.style.left = "150px";
+            terminalWindow.classList.remove("maximized");
+            terminalMaximized = false;
             terminalWindow.style.display = "flex";
             addTerminalToTaskbar();
         });
@@ -548,6 +566,11 @@
         }
         terminalCloseBtn.addEventListener("click", () => {
             terminalWindow.style.display = "none";
+            if(terminalMaximized){
+                taskbar.classList.remove("solid");
+                terminalMaximized = false;
+            }
+            terminalWindow.style.display = "none";
             removeTerminalFromTaskbar();
         });
         terminalMinBtn.addEventListener("click", () => {
@@ -563,7 +586,7 @@
                     top: terminalWindow.style.top
                 };
                 terminalWindow.style.width = "100vw";
-                terminalWindow.style.height = "calc(100vh-50px)";
+                terminalWindow.style.height = "calc(100vh - 50px)";
                 terminalWindow.style.left  = "0";
                 terminalWindow.style.top = "0";
                 terminalWindow.style.display = "flex";
@@ -577,6 +600,8 @@
                 terminalWindow.style.left=terminalPrevState.left;
                 terminalWindow.style.top=terminalPrevState.top;
                 terminalWindow.style.display = "flex";
+                terminalWindow.classList.remove("maximized");
+                taskbar.classList.remove("solid");
             }
             terminalMaximized = !terminalMaximized;
         });
@@ -600,18 +625,26 @@
             img.style.height="40px";
 
             item.addEventListener("mouseenter", () => {
-                item.style.background = "rgba(0,255,0,0.1)";
+                item.style.background = "rgba(54,52,52,0.1)";
                 item.style.borderRadius = "4px";
-                item.style.border = "1px solid rgba(0,255,0,0.2)";
+                item.style.border = "1px solid rgba(255,255,255,0.2)";
             });
 
             item.addEventListener("click", () => {
                 if(terminalWindow.style.display === "none"){
                     terminalWindow.style.display = "flex";
+                    if(terminalMaximized) taskbar.classList.add("solid");
                 } else {
                     terminalWindow.style.display = "none";
+                    if(terminalMaximized) taskbar.classList.remove("solid");
                 }
             });
+
+            item.addEventListener("mouseleave", () => {
+                item.style.background = "none";
+                item.style.border = "none";
+            })
+
             item.appendChild(img);
             taskbarItems.appendChild(item);
         }
