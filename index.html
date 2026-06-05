@@ -40,11 +40,13 @@
             font-family: sans-serif;
             font-size: 14px;
             margin-left: auto;
+            user-select: none;
         }
         #os-text {
             color: white;
             font-family: sans-serif;
             font-size: 14px;
+            user-select: none;
         }
         #notepad-icon img {
             width: 60px;
@@ -205,6 +207,7 @@
             opacity: 1;
             animation: bootFadeOut 3.5s ease-out forwards;
             z-index: 9999899;
+            user-select: none;
         }
         @keyframes bootFadeOut {
             0% { opacity: 1; }
@@ -303,6 +306,62 @@
             padding: 0;
             white-space: pre-wrap;
             word-break: break-word;
+            user-select: text;
+        }
+        #taskbar-seperator-2,
+        #taskbar-seperator-3 {
+            width: 2px;
+            height: 30px;
+            background: rgba(255,255,255,0.9);
+            margin: 0 15px;
+        }
+        #power-button {
+            background: none;
+            border: none;
+            padding: 0;
+            margin: 0;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        #power-button img{
+            width: 24px;
+            height: 24px;
+        }
+        #power-button:hover{
+            background: rgba(255,255,255,0.1);
+            border-radius: 4px;
+        }
+        #power-menu {
+            position: absolute;
+            bottom: 60px;
+            right: 15px;
+            background: rgba(20,20,20,0.489);
+            border: 1px solid rgba(255,255,255,0.1);
+            min-width: 180px;
+            display: none;
+            flex-direction: column;
+            backdrop-filter: blur(10px);
+            border-radius: 8px;
+            overflow: hidden;
+            z-index: 10001
+        }
+        .power-option {
+            color: white;
+            font-family: sans-serif;
+            font-size: 14px;
+            padding: 12px 16px;
+            padding-left: 20px;
+            cursor: pointer;
+            transition: background 0.15s ease;
+        }
+        .power-option:hover {
+            background: rgba(255,255,255,0.8);
+        }
+        .power-divider{
+            height: 1px;
+            background: rgba(255,255,255,0.1);
         }
     </style>
 </head>
@@ -340,7 +399,7 @@
                 <div id="terminal-output"></div>
                 <div id="terminal-line">
                     <span id="terminal-prompt">user@GenericOS~:$ </span>
-                    <input id="terminal-input" autocomplete=""off" placeholder="   Type a command. Type 'help' for help."/>
+                    <input id="terminal-input" autocomplete=""off" placeholder=" Type a command. Type 'help' for help."/>
                 </div>
             </div>
         </div>
@@ -353,6 +412,16 @@
             <div id="taskbar-seperator"></div>
             <div id="taskbar-items"></div>
             <div id="clock"></div>
+            <div id="taskbar-seperator-2"></div>
+            <button id="power-button">
+                <img src="assets/power-button-icon.png">
+            </button>
+            <div id="power-menu">
+                <div class = "power-option">Power Off</div>
+                <div class= "power-divider"></div>
+                <div class= "power-option">Restart</div>
+            </div>
+            <div id="taskbar-seperator-3"></div>
         </div>
     </div>
     <script src="commands.js"></script>
@@ -375,6 +444,9 @@
                 hours -= 12;
                 ampm = "PM";
             } 
+            if(hours == 0){
+                hours = 12;
+            }
 
             minutes = minutes.toString().padStart(2, '0');
             seconds = seconds.toString().padStart(2, '0');
@@ -726,6 +798,31 @@
 
             terminalInput.value = "";
             terminalContent.scrollTop = terminalContent.scrollHeight;
+        });
+        //power menu functionality
+        const powerButton = document.getElementById("power-button");
+        const powerMenu = document.getElementById("power-menu");
+
+        powerButton.addEventListener("click", () => {
+            powerMenu.style.display = 
+                powerMenu.style.display === "block"
+                    ? "none"
+                    : "block";
+        });
+        document.addEventListener("click", (e) =>{
+            if(!powerButton.contains(e.target) && !powerMenu.contains(e.target)) {
+                powerMenu.style.display = "none";
+            }
+        });
+        const restartOption = document.querySelector(".power-option:last-child");
+        const powerOffOption = document.querySelector(".power-option:first-child");
+
+        restartOption.addEventListener("click", () => {
+            window.location.reload();
+        });
+        powerOffOption.addEventListener("click", () =>{
+            window.close();
+            alert("Shutdown. (window close failed)");
         });
     </script>
 </body>
