@@ -53,17 +53,26 @@
             taskbar.classList.add("solid");
         } else if (e.clientX < snapThreshold) {
             activeWindow.style.width = "50vw";
-            activeWindow.style.height = "calc(100vh-50px)";
+            activeWindow.style.height = "calc(100vh - 50px)";
             activeWindow.style.left = "0px";
             activeWindow.style.top = "0px";
             activeWindow.classList.add("snapped");
         } else if (e.clientX > screenWidth - snapThreshold) { 
             activeWindow.style.width = "50vw";
-            activeWindow.style.height = "calc(100vh-50px)";
+            activeWindow.style.height = "calc(100vh - 50px)";
             activeWindow.style.left = "50vw";
             activeWindow.style.top = "0px";
             activeWindow.classList.add("snapped");
         } else {
+            if (activeWindow.classList.contains("snapped") || activeWindow.classList.contains("maximized")) {
+                activeWindow.classList.remove("snapped", "maximized");
+                taskbar.classList.remove("solid");
+                activeWindow.style.width = preSnapState.width;
+                activeWindow.style.height = preSnapState.height;
+                
+                offsetX = activeWindow.offsetWidth / 2; 
+            }
+            
             activeWindow.style.left = `${e.clientX - offsetX}px`;
             activeWindow.style.top = `${e.clientY - offsetY}px`;
         }
