@@ -23,6 +23,7 @@ terminalIcon.addEventListener("click", () => {
     terminalWindow.classList.remove("maximized");
     terminalMaximized = false;
     terminalWindow.style.display = "flex";
+    window.focusWindow(terminalWindow);
     addTerminalToTaskbar();
 });
 
@@ -108,6 +109,7 @@ function addTerminalToTaskbar() {
     item.addEventListener("click", () => {
         if(terminalWindow.style.display === "none"){
             terminalWindow.style.display = "flex";
+            window.focusWindow(terminalWindow);
             if(terminalMaximized) taskbar.classList.add("solid");
         } else {
             terminalWindow.style.display = "none";
@@ -162,6 +164,10 @@ terminalInput.addEventListener("keydown", (e) => {
     
     terminalInput.value = "";
     terminalContent.scrollTop = terminalContent.scrollHeight;
+});
+
+terminalWindow.addEventListener("mousedown", () => {
+    window.bringToFront(terminalWindow);
 });
 
 })();

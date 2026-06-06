@@ -12,6 +12,7 @@
         notepadWindow.classList.remove("maximized");
         isMaximized = false;
         notepadWindow.style.display = "flex";
+        window.focusWindow(notepadWindow);
         addToTaskbar();
     });
 
@@ -48,6 +49,7 @@
         item.addEventListener("click", () => {
             if (notepadWindow.style.display === "none") {
                 notepadWindow.style.display = "flex";
+                window.focusWindow(notepadWindow);
                 if(isMaximized) taskbar.classList.add("solid");
             } else {
                 notepadWindow.style.display = "none";
@@ -66,5 +68,7 @@
     window.openNotepad = () => {
             notepadWindow.style.display = "flex";
         };
-
+    notepadWindow.addEventListener("mousedown", () => {
+        window.bringToFront(notepadWindow);
+    });
 })();
