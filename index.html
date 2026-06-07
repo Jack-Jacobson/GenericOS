@@ -5,6 +5,7 @@
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/notepad.css">
     <link rel="stylesheet" href="css/terminal.css">
+    <link rel="stylesheet" href="css/minesweeper.css">
 </head>
 <body>
     <div id="desktop">
@@ -21,8 +22,18 @@
             </div>
             <textarea id="notepad-textarea" placeholder="Type here!"></textarea>
         </div>
-
-        <div id="notepad-icon">
+        <div id="minesweeper-window">
+            <div id="minesweeper-titleBar">
+                <div id="minesweeper-controls">
+                    <button id="minesweeper-min-btn">–</button>
+                    <button id="minesweeper-max-btn">□</button>
+                    <button id="minesweeper-close-btn">✕</button>
+                </div>
+            </div>
+            <div id="minesweeper-game-container">
+            </div>
+        </div>
+        <div id="notepad-icon" class="desktop-icon">
             <img src="assets/notepad-icon.png" />
             <div>Notepad</div>
         </div>
@@ -46,7 +57,12 @@
             </div>
         </div>
 
-        <div id="terminal-icon">
+        <div id="minesweeper-icon" class ="desktop-icon">
+            <img src="assets/minesweeper-icon.png" />
+            <div>Minesweeper</div>
+        </div>
+
+        <div id="terminal-icon" class="desktop-icon">
             <img src="assets/terminal-icon.png" />
             <div>Terminal</div>
         </div>
@@ -75,6 +91,7 @@
     <script src="js/terminal.js"></script>
     <script src="js/powerManager.js"></script>
     <script src="js/misc.js"></script>
+    <script src="js/minesweeper.js"></script>
 
 </body>
 </html>
