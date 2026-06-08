@@ -17,6 +17,15 @@
     border: 1px solid rgba(255,255,255,0.1);
     overflow:hidden;
 }
+#minesweeper-window.maximized {
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: calc(100vh-50px);
+    border-radius: 0;
+    border: none;
+    cursor: default;
+}
 #minesweeper-titleBar{
     height: 30px;
     background: rgba(0,0,0,0.6);
