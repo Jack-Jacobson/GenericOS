@@ -65,9 +65,9 @@ Once running, navigate to any web-browser and go to <a href="http://localhost:80
 `xdg-open index.html`
 
 ## Hosting & Deployment
-The website where it is hosted, [genericos.jackjacbson2011.com](os.jackjacobson2011.com), is linked via a cloudflare tunnel to a 24/7 linux machine running nginx. Once configured, you cna host any website using these tools. The server is provided free of charge for educational purposes by the nonprofit HackClub Nest.
+The website where it is hosted, [genericos.jackjacbson2011.com](https://os.jackjacobson2011.com), is linked via a cloudflare tunnel to a 24/7 linux machine running nginx. Once configured, you cna host any website using these tools. The server is provided free of charge for educational purposes by the nonprofit HackClub Nest.
 
 ## Future Roadmap
 While this is how the OS will remain for now, in the future I plan non making many more features, such as more games and apps. Bugs will be fixed as they are found, and any security or major issue will be fixed with haste. 
 
-Thank you for checking out my project, and while your here, check out my [portfolio](jackjacobson2011.com)! If you are seeing this from HackClub, shoot me a dm on slack for a suprise!
+Thank you for checking out my project, and while your here, check out my [portfolio](https://jackjacobson2011.com)! If you are seeing this from HackClub, shoot me a dm on slack for a suprise!
