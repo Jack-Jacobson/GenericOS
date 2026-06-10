@@ -27,17 +27,6 @@ terminalIcon.addEventListener("click", () => {
     addTerminalToTaskbar();
 });
 
-if(terminalTitleBar){
-    terminalTitleBar.addEventListener("mousedown", (e) => {
-        if(terminalMaximized) return;
-        isDragging= true;
-        globalDragging = true;
-        offsetX = e.clientX-terminalWindow.offsetLeft;
-        offsetY = e.clientY-terminalWindow.offsetTop;
-        terminalWindow.style.cursor="grabbing";
-    });
-}
-
 terminalCloseBtn.addEventListener("click", () => {
     terminalWindow.style.display = "none";
     if(terminalMaximized){

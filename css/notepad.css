@@ -25,7 +25,7 @@
     cursor: default;
 }
 
-#notepad-window.maximized #titleBar {
+#notepad-window.maximized #notepad-titleBar {
     cursor: default;
 }
 

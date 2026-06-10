@@ -14,6 +14,8 @@
         if(!bar || !win) return;
         
         bar.addEventListener("mousedown", (e) => {
+            if (e.target.closest("button")) return;
+            
             isDragging = true;
             activeWindow = win;
             offsetX = e.clientX - win.offsetLeft;

@@ -68,6 +68,45 @@
     window.openNotepad = () => {
             notepadWindow.style.display = "flex";
         };
+    document.getElementById("max-btn").addEventListener("click", () => {
+        const taskbar = document.getElementById("taskbar");
+        
+        if (!isMaximized) {
+            preMaximizedStyle = {
+                top: notepadWindow.style.top,
+                left: notepadWindow.style.left,
+                width: notepadWindow.style.width,
+                height: notepadWindow.style.height
+            };
+
+            notepadWindow.style.width = "100vw";
+            notepadWindow.style.height = "calc(100vh - 50px)";
+            notepadWindow.style.left  = "0";
+            notepadWindow.style.top = "0";
+            notepadWindow.style.display = "flex";
+            notepadWindow.classList.add("maximized");
+            taskbar.classList.add("solid");
+            isMaximized = true;
+        } else {
+            notepadWindow.classList.remove("maximized");
+            notepadWindow.style.top = preMaximizedStyle.top;
+            notepadWindow.style.left = preMaximizedStyle.left;
+            notepadWindow.style.width = preMaximizedStyle.width;
+            notepadWindow.style.height = preMaximizedStyle.height;
+            
+            taskbar.classList.remove("solid");
+            isMaximized = false;
+        }
+    });
+
+    document.getElementById("min-btn").addEventListener("click", () => {
+        notepadWindow.style.display = "none";
+        const taskbar = document.getElementById("taskbar");
+        if (isMaximized) {
+            taskbar.classList.remove("solid");
+        }
+    });
+
     notepadWindow.addEventListener("mousedown", () => {
         window.bringToFront(notepadWindow);
     });
