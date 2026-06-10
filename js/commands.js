@@ -1,7 +1,7 @@
 const commands = {
     test: "test recieved :D",
     whoami: "you are you, obviously",
-    version: "v0.0.0.0 HOW ARE YOU SEEING THIS, I HAVENT RELEASED THIS YET D",
+    version: "v1.0.0.0 Initial Release! If you are seeing this from HackClub, shoot me a dm on slack for a suprise!",
     selfDestruct: "Run. Self destructing in 3...",
     gaslight: "Error 404, gaslight not a real command",
     status: "If you are reading this, terminal working ig?",
