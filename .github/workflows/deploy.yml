@@ -21,30 +21,24 @@ jobs:
           username: jack-jacobson2156
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           script: |
-            # 1. Authorize the directory context
             git config --global --add safe.directory /root/GenericOS
 
             cd /var/www/os-project;
 
-            # 2. Safety check: Initialize git if missing
             if [ ! -d ".git" ]; then
               git init
             fi
 
-            # 3. Re-point origin specifically to the GenericOS repository
             git remote remove origin 2>/dev/null || true
             git remote add origin https://github.com/Jack-Jacobson/GenericOS.git
 
-            # 4. Pull down the latest code updates forcefully
             git fetch origin main
             git reset --hard origin/main
 
-            # 5. Cycle server processes and print status codes
             sudo systemctl restart nginx || true
             echo "nginx exit code: $?"
 
             sudo systemctl restart cloudflared || true
             echo "cloudflare exit code: $?"
 
-            # 6. Force clean execution status to satisfy GitHub runner
             true
