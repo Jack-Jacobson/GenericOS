@@ -36,18 +36,22 @@
     display: flex;
     gap: 2px;
 }
-#browser-controls button {
-    background: transparent;
-    border: none;
+#browser-toolbar button {
+    background: #444;
+    border: 1px solid #555;
     color: white;
-    width: 24px;
-    height: 24px;
-    cursor: pointer;
-    font-size: 14px;
-}
-#browser-controls button:hover {
-    background: rgba(255, 255, 255, 0.1);
     border-radius: 4px;
+    padding: 4px 8px;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 26px; 
+}
+#browser-toolbar button:hover {
+    background: #555;
+    border-color: #666;
+    color: #fff;
 }
 #browser-toolbar {
     display: flex;
