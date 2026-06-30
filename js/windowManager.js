@@ -40,7 +40,8 @@
     attachDrag("notepad-window", "notepad-titleBar");
     attachDrag("terminal-window", "terminal-titleBar");
     attachDrag("minesweeper-window", "minesweeper-titleBar");
-
+    attachDrag("browser-window", "browser-titleBar");
+    
     document.addEventListener("mousemove", (e) => {
         if (!isDragging || !activeWindow) return;
 

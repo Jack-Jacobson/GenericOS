@@ -3,7 +3,7 @@
     top: 80px;
     left: 120px;
     width: 800px;
-    height: 500 px;
+    height: 500px;
     background: rgba(30, 30, 30, 0.95);
     color: white;
     border-radius: 8px;
@@ -20,6 +20,7 @@
     top: 0;
     left: 0;
     width: 100vw;
+    height: calc(100vh - 50px);
 }
 #browser-titleBar {
     height: 30px;
@@ -76,4 +77,17 @@
 }
 #browser-url:focus {
     border-color: #666;
+}
+#browser-content {
+    flex: 1;
+    position: relative;
+    background: white;
+}
+#browser-iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: none;
 }

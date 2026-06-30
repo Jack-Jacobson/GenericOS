@@ -24,7 +24,7 @@ jobs:
             # 1. Authorize the directory context
             git config --global --add safe.directory /root/GenericOS
 
-            cd /root/GenericOS
+            cd /var/www/os-project;
 
             # 2. Safety check: Initialize git if missing
             if [ ! -d ".git" ]; then
