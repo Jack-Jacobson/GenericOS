@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="css/notepad.css">
     <link rel="stylesheet" href="css/terminal.css">
     <link rel="stylesheet" href="css/minesweeper.css">
+    <link rel="stylesheet" href="css/browser.css">
 </head>
 <body>
     <div id="desktop">
@@ -57,7 +58,26 @@
                 </div>
             </div>
         </div>
-
+        <div id="browser-window">
+            <div id="browser-titleBar">
+                <div id="browser-title">Web Browser</div>
+                
+                <div id="browser-controls">
+                    <button id="browser-min-btn">-</button>
+                    <button id="browser-max-btn">[]</button>
+                    <button id="browser-close-btn">x</button>
+                </div>
+            </div>
+            <div id="browser-toolbar">
+                <button id="browser-back-btn">←</button>
+                <button id="browser-refresh-btn">↻</button>
+                <input type="text" id="browser-url" value="https://example.com" placeholder="Enter URL..." autocomplete="off">
+                <button id="browser-go-btn">Go</button>
+            </div>
+            <div id="browser-content">
+                <iframe id="browser-iframe" src="https://example.com" title="Web Browser" frameborder="0"></iframe>
+            </div>
+        </div>
         <div id="minesweeper-icon" class ="desktop-icon">
             <img src="assets/minesweeper-icon.png" />
             <div>Minesweeper</div>
@@ -66,6 +86,11 @@
         <div id="terminal-icon" class="desktop-icon">
             <img src="assets/terminal-icon.png" />
             <div>Terminal</div>
+        </div>
+
+        <div id="browser-icon" class="desktop-icon">
+            <img src="assets/browser-icon.png" />
+            <div>Browser</div>
         </div>
 
         <div id="taskbar">
@@ -93,6 +118,7 @@
     <script src="js/powerManager.js"></script>
     <script src="js/misc.js"></script>
     <script src="js/minesweeper.js"></script>
+    <script src="js/browser.js"></script>
 
 </body>
 </html>
