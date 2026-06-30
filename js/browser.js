@@ -107,13 +107,85 @@
         window.bringToFront(browserWindow);
     });
 
-    function navigate() {
+    async function navigate() {
         let url = urlInput.value.trim();
+        
         if (!url.startsWith('http://') && !url.startsWith('https://')) {
             url = 'https://' + url;
-            urlInput.value = url;
         }
-        iframe.src = url;
+
+        let targetUrl = url;
+        
+        let cleanUrl = url.replace(/^(https?:\/\/)?(www\.)?/, '');
+
+        if (url.includes('google.com/search')) {
+            if (!url.includes('&igu=1')) {
+                targetUrl = url + (url.includes('?') ? '&' : '?') + 'igu=1';
+            }
+        } else if (url.includes('google.com') && !url.includes('maps') && !url.includes('mail') && !url.includes('drive')) {
+            targetUrl = "https://www.google.com/search?q=&igu=1";
+        }
+
+        else if (url.includes('duckduckgo.com')) {
+            const query = url.split('q=')[1] || "";
+            if (query) {
+                targetUrl = "https://html.duckduckgo.com/html/?q=" + query;
+            } else {
+                targetUrl = "https://html.duckduckgo.com/html/";
+            }
+        }
+
+        else if (cleanUrl.startsWith('youtube.com') || cleanUrl.startsWith('youtu.be')) {
+            if (url.includes('v=')) {
+                const videoId = url.split('v=')[1]?.split('&')[0] || "";
+                if (videoId) {
+                    targetUrl = `https://www.youtube-nocookie.com/embed/${videoId}`;
+                }
+            } else if (url.includes('youtu.be/')) {
+                const videoId = url.split('youtu.be/')[1]?.split('?')[0] || "";
+                if (videoId) {
+                    targetUrl = `https://www.youtube-nocookie.com/embed/${videoId}`;
+                }
+            } else {
+
+                targetUrl = `https://www.youtube-nocookie.com/embed?listType=playlist&list=PLrEnWoR77e9g60fS9w_Y2A_3E_G2E81U-`;
+            }
+        }
+
+        else if (cleanUrl.startsWith('twitch.tv')) {
+            const host = window.location.hostname || "localhost";
+            const path = cleanUrl.replace('twitch.tv/', '').split('?')[0].trim();
+            
+            if (!path || path === 'directory' || path === 'search') {
+
+                targetUrl = `https://player.twitch.tv/?channel=twitch&parent=${host}`;
+            } else {
+                targetUrl = `https://player.twitch.tv/?channel=${path}&parent=${host}`;
+            }
+        }
+
+        else if (url.includes('google.com/maps') || url.includes('maps.google.com') || url.includes('googleusercontent.com/maps.google.com')) {
+            if (!url.includes('output=embed')) {
+                targetUrl = url + (url.includes('?') ? '&' : '?') + 'output=embed';
+            }
+        }
+
+        else if (url.includes('vimeo.com/') && !url.includes('player.vimeo.com')) {
+            const videoId = url.split('vimeo.com/')[1]?.split('?')[0] || "";
+            if (videoId && !isNaN(videoId)) {
+                targetUrl = `https://player.vimeo.com/video/${videoId}`;
+            }
+        }
+
+        else if (url.includes('soundcloud.com/') && !url.includes('w.soundcloud.com')) {
+            targetUrl = `https://w.soundcloud.com/player/?url=${encodeURIComponent(url)}`;
+        }
+
+        else if (url.includes('ted.com/talks/') && !url.includes('embed.ted.com')) {
+            targetUrl = url.replace('ted.com/talks/', 'embed.ted.com/talks/');
+        }
+
+        iframe.src = targetUrl; 
     }
 
     goBtn.addEventListener("click", navigate);
@@ -125,7 +197,7 @@
     });
 
     refreshBtn.addEventListener("click", () => {
-        iframe.src = iframe.src;
+        navigate();
     });
 
     backBtn.addEventListener("click", () => {
