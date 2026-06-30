@@ -1,0 +1,26 @@
+name: Deploy to Hack Club App
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Deploy via SSH
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: hackclub.app
+          username: jack-jacobson2156
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          script: |
+            cd /root/GenericOS
+            git fetch origin main
+            git reset --hard origin/main
+            systemctl reload nginx
