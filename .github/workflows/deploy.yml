@@ -21,7 +21,7 @@ jobs:
           username: jack-jacobson2156
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           script: |
-            git config --global --add safe.directory /root/GenericOS
+            git config --global --add safe.directory /var/www/os-project
 
             cd /var/www/os-project;
 
@@ -35,10 +35,5 @@ jobs:
             git fetch origin main
             git reset --hard origin/main
 
-            sudo systemctl restart nginx || true
-            echo "nginx exit code: $?"
 
-            sudo systemctl restart cloudflared || true
-            echo "cloudflare exit code: $?"
-
-            true
+            echo "Deployment successful!"
