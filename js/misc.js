@@ -101,13 +101,11 @@ bootScreen.remove();
     }, true);
 
     function saveIconPositions() {
-        const saved = localStorage.getItem("iconPositions");
-        if(!saved) return;
-        const positions = JSON.parse(saved);
+        const positions = {};
         icons.forEach(icon => {
-            icon.style.top = positions[icon.id].top;
-            icon.style.left = positions[icon.id].left;
+            positions[icon.id] = { top: icon.style.top, left: icon.style.left };
         });
+        localStorage.setItem("iconPositions", JSON.stringify(positions));
     }
 
     function loadIconPositions() {
