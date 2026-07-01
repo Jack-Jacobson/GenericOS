@@ -36,6 +36,95 @@ bootScreen.remove();
 }
 }, 3500);
 
+
+
+(function() {
+    const iconIds = ["notepad-icon", "terminal-icon", "browser-icon", "minesweeper-icon"];
+    const icons = iconIds.map(id => document.getElementById(id)).filter(Boolean);
+
+    let draggedIcon = null;
+    let offsetX = 0, offsetY = 0;
+    let startX = 0, startY = 0;
+    let hasDragged = false;
+    const DRAG_THRESHOLD = 5;
+
+    icons.forEach(icon => {
+        icon.addEventListener("mousedown", (e) => {
+            draggedIcon = icon;
+            hasDragged = false;
+            startX = e.clientX;
+            startY = e.clientY;
+            offsetX = e.clientX - icon.offsetLeft;
+            offsetY = e.clientY - icon.offsetTop;
+        });
+    });
+
+    icons.forEach(icon => {
+        const img = icon.querySelector("img");
+        if(img) img.draggable = false;
+        icon.addEventListener("dragstart", (e) => e.preventDefault());
+    });
+
+    const GRID_SIZE = 100;
+    const GRID_OFFSET = 20;
+
+    function snapToGrid(value){
+        return Math.round((value - GRID_OFFSET) / GRID_SIZE) * GRID_SIZE + GRID_OFFSET;
+    }
+
+    document.addEventListener("mousemove", (e) => {
+        if(!draggedIcon || e.buttons !== 1) return;
+        const dx = Math.abs(e.clientX - startX);
+        const dy = Math.abs(e.clientY - startY);
+        if (dx > DRAG_THRESHOLD || dy > DRAG_THRESHOLD) hasDragged = true;
+        if(hasDragged){
+            draggedIcon.style.left = (e.clientX - offsetX) + "px";
+            draggedIcon.style.top = (e.clientY - offsetY) + "px";
+        }
+    });
+
+    document.addEventListener("mouseup", () => {
+        if(draggedIcon && hasDragged) {
+            draggedIcon.style.left = snapToGrid(draggedIcon.offsetLeft) + "px";
+            draggedIcon.style.top = snapToGrid(draggedIcon.offsetTop) + "px";
+            saveIconPositions();
+        }
+        draggedIcon = null;
+    });
+
+    document.addEventListener("click", (e) => {
+        if(hasDragged) {
+            e.stopPropagation();
+            e.preventDefault();
+            hasDragged = false;
+        }
+    }, true);
+
+    function saveIconPositions() {
+        const saved = localStorage.getItem("iconPositions");
+        if(!saved) return;
+        const positions = JSON.parse(saved);
+        icons.forEach(icon => {
+            icon.style.top = positions[icon.id].top;
+            icon.style.left = positions[icon.id].left;
+        });
+    }
+
+    function loadIconPositions() {
+        const saved = localStorage.getItem("iconPositions");
+        if (!saved) return;
+        const positions = JSON.parse(saved);
+        icons.forEach(icon => {
+            if (positions[icon.id]) {
+                icon.style.top = positions[icon.id].top;
+                icon.style.left = positions[icon.id].left;
+            }
+        });
+    }
+
+    loadIconPositions();
+})();
+
 (function() {
     const wallpaperMenu = document.createElement("div");
     wallpaperMenu.id = "wallpaper-menu";
