@@ -43,7 +43,7 @@ bootScreen.remove();
     let draggedIcon = null;
     let offsetX = 0, offsetY = 0;
     let startX = 0, startY = 0;
-    let hasDragging = false;
+    let hasDragged = false;
     const DRAG_THRESHOLD = 5;
 
     icons.forEach(icon => {
@@ -61,7 +61,7 @@ bootScreen.remove();
         if(!draggedIcon) return;
         const dx = Math.abs(e.clientX - startX);
         const dy = Math.abs(e.clientY - startY);
-        if (dc > DRAG_THRESHOLD || dy > DRAG_THRESHOLD) hasDragged = true;
+        if (dx > DRAG_THRESHOLD || dy > DRAG_THRESHOLD) hasDragged = true;
         if(hasDragged){
             draggedIcon.style.left = (e.clientX - offsetX) + "px";
             draggedIcon.style.top = (e.clientY - offsetY) + "px";
@@ -91,5 +91,17 @@ bootScreen.remove();
         });
     }
 
+    function loadIconPositions() {
+        const saved = localStorage.getItem("iconPositions");
+        if (!saved) return;
+        const positions = JSON.parse(saved);
+        icons.forEach(icon => {
+            if (positions[icon.id]) {
+                icon.style.top = positions[icon.id].top;
+                icon.style.left = positions[icon.id].left;
+            }
+        });
+    }
+
     loadIconPositions();
-})
+})();
