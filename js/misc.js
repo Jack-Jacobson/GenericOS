@@ -57,8 +57,21 @@ bootScreen.remove();
         });
     });
 
+    icons.forEach(icon => {
+        const img = icon.querySelector("img");
+        if(img) img.draggable = false;
+        icon.addEventListener("dragstart", (e) => e.preventDefault());
+    });
+
+    const GRID_SIZE = 100;
+    const GRID_OFFSET = 20;
+
+    function snapToGrid(value){
+        return Math.round((value - GRID_OFFSET) / GRID_SIZE) * GRID_SIZE + GRID_OFFSET;
+    }
+
     document.addEventListener("mousemove", (e) => {
-        if(!draggedIcon) return;
+        if(!draggedIcon || e.buttons !== 1) return;
         const dx = Math.abs(e.clientX - startX);
         const dy = Math.abs(e.clientY - startY);
         if (dx > DRAG_THRESHOLD || dy > DRAG_THRESHOLD) hasDragged = true;
@@ -69,7 +82,11 @@ bootScreen.remove();
     });
 
     document.addEventListener("mouseup", () => {
-        if(draggedIcon && hasDragged) saveIconPositions();
+        if(draggedIcon && hasDragged) {
+            draggedIcon.style.left = snapToGrid(draggedIcon.offsetLeft) + "px";
+            draggedIcon.style.top = snapToGrid(draggedIcon.offsetTop) + "px";
+            saveIconPositions();
+        }
         draggedIcon = null;
     });
 
@@ -81,7 +98,7 @@ bootScreen.remove();
         }
     }, true);
 
-    function saveIconpositions() {
+    function saveIconPositions() {
         const saved = localStorage.getItem("iconPositions");
         if(!saved) return;
         const positions = JSON.parse(saved);
