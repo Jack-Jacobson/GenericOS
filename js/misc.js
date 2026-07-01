@@ -42,7 +42,7 @@ bootScreen.remove();
     wallpaperMenu.style.cssText = "position:absolute; display:none; background:rgba(20,20,20,0.9); border:1px solid rgba(255,255,255,0.2); border-radius:4px; padding:5px 0; z-index:99999; font-family:sans-serif; font-size:14px; color:white;";
 
     const changeWallpaperOption = document.createElement("div");
-    changeWallpaperOption = "Change Wallpaper";
+    changeWallpaperOption.textContent = "Change Wallpaper";
     changeWallpaperOption.style.cssText = "padding:8px 15px; cursor:pointer;";
     changeWallpaperOption.addEventListener("mouseenter", () => changeWallpaperOption.style.background = "rgba(255,255,255,0.1)");
     changeWallpaperOption.addEventListener("mouseleave", () => changeWallpaperOption.style.background = "none");
