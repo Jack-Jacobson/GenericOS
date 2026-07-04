@@ -73,7 +73,6 @@
                 taskbar.classList.remove("solid");
                 activeWindow.style.width = preSnapState.width;
                 activeWindow.style.height = preSnapState.height;
-                
                 offsetX = activeWindow.offsetWidth / 2; 
             }
             

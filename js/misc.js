@@ -110,7 +110,7 @@ bootScreen.remove();
 
     function loadIconPositions() {
         const saved = localStorage.getItem("iconPositions");
-        if (!saved) return;
+        if (!saved) return;0
         const positions = JSON.parse(saved);
         icons.forEach(icon => {
             if (positions[icon.id]) {
