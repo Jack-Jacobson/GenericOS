@@ -23,6 +23,12 @@
         bootProgressBar.style.width = percent + "%";
         bootStatus.textContent = label;
     }
+    
+    const STEP_DELAY = 450;
+
+    function delat(ms){
+        return new Promise(resolve => setTimeout(resolve, ms));
+    }
 
     function loadAsset(url) {
         return new Promise((resolve) => {
@@ -41,6 +47,13 @@
         });
     }
 
+    async function loadAllAssets() {
+        for (const url of assetsUrls) {
+            await loadAsset(url);
+            await delat(STEP_DELAY);
+        }
+    }
+
     function finishBoot() {
         updateProgress("Ready!");
         setTimeout(() => {
@@ -53,11 +66,9 @@
 
     updateProgress("Starting GenericOS...");
 
-    const minDisplayTime = new Promise (resolve => setTimeout(resolve, 1200));
-
     if (totalAssets === 0 ){
-        minDisplayTime.then(finishBoot);
+        delay(1200).then(finishBoot);
     } else {
-        Promise.all([Promise.all(assetsUrls.map(loadAsset)), minDisplayTime]).then(finishBoot);
+        loadAllAssets().then(finishBoot);
     }
 })();
