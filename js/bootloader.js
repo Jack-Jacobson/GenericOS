@@ -10,7 +10,9 @@
         ? ["assets/loading-screen.jpeg"]
         : ["assets/wallpaper.jpeg", "assets/loading-screen.jpeg"];
 
-    const domImageSrcs = Array.from(document.images).map(img => img.src);
+    const domImageSrcs = Array.from(document.images)
+        .filter(img => img.getAttribute("src") && img.getAttribute("src").trim() !== "")
+        .map(img => img.src);
     const assetsUrls = Array.from(new Set([...domImageSrcs, ...extraAssets]));
 
     const totalAssets = assetsUrls.length;
@@ -25,7 +27,7 @@
     function loadAsset(url) {
         return new Promise((resolve) => {
             const img = new Image();
-            img.onLoad = () => {
+            img.onload = () => {
                 loadedCount++;
                 updateProgress(`Loading ${url.split("/").pop()}...`);
                 resolve();
