@@ -12,15 +12,15 @@
 
     const startMenu = document.createElement("div");
     startMenu.id = "start-menu";
-    startMenu.style.dispay = "none";
-
+    startMenu.style.display = "none";
+        
     const searchInput = document.createElement("input");
     searchInput.type = "text";
     searchInput.id = "start-menu-search";
     searchInput.placeholder = "Search apps or the web...";
-    startMenu.appendChild(resultsList);
+    startMenu.appendChild(searchInput);
 
-    const resultsList = document.getElementById("div");
+    const resultsList = document.createElement("div");
     resultsList.id = "start-menu-results";
     startMenu.appendChild(resultsList);
 
@@ -35,7 +35,7 @@
 
         filteredApps.forEach((app, index) => {
             const item = document.createElement("div");
-            item.className = "start-meny-item";
+            item.className = "start-menu-item";
             if(index === 0) item.classList.add("selected");
 
             const img = document.createElement("img");
@@ -124,13 +124,13 @@
     });
 
     document.addEventListener("click", (e) => {
-        if(startMenu.style.display === "flex" && !startMenu.contains(e.traget)) {
+        if(startMenu.style.display === "flex" && !startMenu.contains(e.target)) {
             closeStartMenu();
         }
     });
 
     document.addEventListener("keydown", (e) => {
-        if(e.ctrlKey && e.code === "space"){
+        if(e.ctrlKey && e.code === "Space"){
             e.preventDefault();
             toggleStartMenu();
         }
