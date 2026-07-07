@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="css/minesweeper.css">
     <link rel="stylesheet" href="css/browser.css">
     <link rel="stylesheet" href="css/startmenu.css">
+    <link rel="stylesheet" href="css/about.css">
 </head>
 <body>
     <div id="desktop">
@@ -36,11 +37,6 @@
             <div id="minesweeper-game-container">
             </div>
         </div>
-        <div id="notepad-icon" class="desktop-icon">
-            <img src="assets/notepad-icon.png" />
-            <div>Notepad</div>
-        </div>
-
         <div id="terminal-window">
             <div id="terminal-titleBar">
                 <div id="terminal-title">Terminal</div>
@@ -99,6 +95,33 @@
       
             </div>
         </div>
+        <div id="about-window">
+            <div id="about-titleBar">
+                <span>About GenericOS</span>
+                <div id="about-controls">
+                    <button id="about-min-btn">_</button>
+                    <button id="about-max-btn">[]</button>
+                    <button id="about-close-btn">X</button>
+                </div>
+            </div>
+            <div id="about-content">
+                <img id="about-slide-icon" src="" alt="">
+                <h2 id="about-slide-title"></h2>
+                <p id="about-slide-text"></p>
+            </div>
+            <div id="about-footer">
+                <button id="about-skip-btn">Skip</button>
+                <div id="about-dots"></div>
+                <div>
+                    <button id="about-back-btn">Back</button>
+                    <button id="about-next-btn">Next</button>
+                </div>
+            </div>
+        </div>
+        <div id="notepad-icon" class="desktop-icon">
+            <img src="assets/notepad-icon.png" />
+            <div>Notepad</div>
+        </div>
         <div id="minesweeper-icon" class ="desktop-icon">
             <img src="assets/minesweeper-icon.png" />
             <div>Minesweeper</div>
@@ -141,6 +164,7 @@
     <script src="js/minesweeper.js"></script>
     <script src="js/browser.js"></script>
     <script src="js/startmenu.js"></script>
+    <script src="js/about.js"></script>
 
 </body>
 </html>

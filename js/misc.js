@@ -39,7 +39,7 @@ bootScreen.remove();
 
 
 (function() {
-    const iconIds = ["notepad-icon", "terminal-icon", "browser-icon", "minesweeper-icon"];
+    const iconIds = ["notepad-icon", "terminal-icon", "browser-icon", "minesweeper-icon", "about-icon"];
     const icons = iconIds.map(id => document.getElementById(id)).filter(Boolean);
 
     let draggedIcon = null;

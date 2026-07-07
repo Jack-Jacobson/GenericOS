@@ -3,7 +3,8 @@
         { name: "Notepad", icon: "assets/notepad-icon.png", targetId: "notepad-icon" },
         { name: "Terminal", icon: "assets/terminal-icon.png", targetId: "terminal-icon" },
         { name: "Web Browser", icon: "assets/browser-icon.png", targetId: "browser-icon" },
-        { name: "Minesweeper", icon: "assets/minesweeper-icon.png", targetId: "minesweeper-icon" }
+        { name: "Minesweeper", icon: "assets/minesweeper-icon.png", targetId: "minesweeper-icon" },
+        { name: "About", icon: "assets/about-icon.png" , targetId: "about-icon"}
     ];
 
     const startButton = document.getElementById("os-text");
