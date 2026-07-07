@@ -222,7 +222,7 @@ body:not(.dragging) #minesweeper-icon:hover {
     font-family: sans-serif;
     font-size: 14px;
     padding: 12px 16px;
-    padding-left: 20px;
+    padding-left: 20px;     
     cursor: pointer;
     transition: background 0.15s ease;
 }
