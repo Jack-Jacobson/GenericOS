@@ -24,7 +24,7 @@
         bootStatus.textContent = label;
     }
     
-    const STEP_DELAY = 530;
+    const STEP_DELAY = 200;
 
     function delat(ms){
         return new Promise(resolve => setTimeout(resolve, ms));
