@@ -1,0 +1,121 @@
+#about-widnow {
+    position: absolute;
+    top: 100 px;
+    left: 250px;
+    width: 500px;
+    height: 420px;
+    background: rgba(30, 30, 30, 0.97);
+    color: white;
+    border-radius: 8px;
+    padding: 0;
+    font-family: sans-serif;
+    user-select: none;
+    display: none;
+    z-index: 100;
+    box-sizing: border-box;
+    flex-direction: column;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    overflow: hidden;
+}
+#about-window.maximized {
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: calc(100vh - 50px);
+    border-radius: 0;
+    cursor: default;
+}
+#about-titleBar {
+    height: 30px;
+    background: rgba(0, 0, 0, 0.6);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-left: 8px;
+    padding-right: 8px;
+    cursor: grab;
+    box-sizing: border-box;
+}
+#about-controls {
+    display: flex;
+    gap: 2px;
+}
+#about-controls button{
+    background: transparent;
+    border: none;
+    color: white;
+    width: 24px;
+    height: 24px;
+    cursor: pointer;
+    font-size: 14px;
+}
+#about-controls button:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 4px;
+}
+#about-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    padding: 25px 20px 10px 20px;
+    box-sizing: border-box;
+    overflow-y: auto;
+}
+#about-slide-icon {
+    width: 64px;
+    height: 64px;
+    margin: 0 auto 15px auto;
+    display: block;
+}
+#about-slide-title {
+    text-align: center;
+    font-size: 20px;
+    margin: 0 0 10px 0;
+}
+#about-slide-text {
+    text-align: center;
+    font-size: 14px;
+    line-height: 1.5;
+    color: #ddd;
+    margin: 0;
+}
+#about-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 20px;
+    border-top: 1px solide rgba(255, 255, 255, 0.1);
+    background: rgba(0, 0, 0, 0.2);
+    box-sizing: border-box;
+}
+#about-dots {
+    display: flex;
+    gap:  6px;
+}
+.about-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.25);
+    transition: background 0.2s ease;
+}
+.about-dot.active {
+    background: #4da3ff;
+}
+#about-skip-btn, #about-back-btn, #about-next-btn {
+    background: #444;
+    border: 1px solid #555;
+    color: white;
+    border-radius: 4px;
+    padding: 6px 14px;
+    cursor: pointer;
+    font-size: 13px;
+}
+#about-skip-btn:hover, #about-back-btn:hover, #about-next-btn:hover {
+    background: #555;
+    border-color: #666;
+}
+#about-back-btn:disabled {
+    opacity: 0.3;
+    cursor: default;
+}
