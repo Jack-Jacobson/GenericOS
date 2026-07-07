@@ -13,7 +13,7 @@
     const slideText = document.getElementById("about-slide-text");
     const taskbar = document.getElementById("taskbar");
 
-    let aboutmaximized = false;
+    let aboutMaximized = false;
     let aboutPrevState = {
         width: aboutWindow.style.width,
         height: aboutWindow.style.height,
@@ -79,7 +79,7 @@
         aboutWindow.style.top = "100px";
         aboutWindow.style.left = "250px";
         aboutWindow.classList.remove("maximized");
-        aboutmaximized = false;
+        aboutMaximized = false;
         aboutWindow.style.display = "flex";
         window.focusWindow(aboutWindow);
         addAboutToTaskbar();

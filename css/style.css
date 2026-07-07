@@ -80,7 +80,7 @@ body {
     user-select: none;
     background: transparent;
     border-radius: 8px;
-    border: 1px solid transparent;;
+    border: 1px solid transparent;
     transition: background 0.15s ease, border 0.15s ease;
 }
 
@@ -103,7 +103,7 @@ body:not(.dragging) #notepad-icon:hover{
     user-select: none;
     background: transparent;
     border-radius: 8px;
-    border: 1px solid transparent;;
+    border: 1px solid transparent;
     transition: background 0.15s ease, border 0.15s ease;
 }
 #browser-icon {
@@ -257,7 +257,7 @@ body:not(.dragging) #minesweeper-icon:hover {
     width: 60px;
     height: 60px;
     display: block;
-    margin: 0 auto 5px autp;
+    margin: 0 auto 5px auto;
     z-index: 10;
 }
 body:not(.dragging) #about-icon:hover {
