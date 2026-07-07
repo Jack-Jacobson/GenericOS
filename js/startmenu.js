@@ -99,5 +99,40 @@
             openStartMenu();
         }
     }
+
+    startButton.addEventListener("click", (e) => {
+        e.stopPropagation();
+        toggleStartMenu();
+    });
+
+    searchInput.addEventListener("input", () => {
+        renderResults(searchInput.value);
+    });
     
-})
+    searchInput.addEventListener("keydown", (e) => {
+        if (e.key === "Enter"){
+            const query = searchInput.value.trim();
+            if (query === "") return;
+            if(filteredApps.length > 0){
+                launchApp(filteredApps[0]);
+            } else {
+                searchWeb(query);
+            }
+        } else if (e.key === "Escape") {
+            closeStartMenu();
+        }
+    });
+
+    document.addEventListener("click", (e) => {
+        if(startMenu.style.display === "flex" && !startMenu.contains(e.traget)) {
+            closeStartMenu();
+        }
+    });
+
+    document.addEventListener("keydown", (e) => {
+        if(e.ctrlKey && e.code === "space"){
+            e.preventDefault();
+            toggleStartMenu();
+        }
+    });
+})();
