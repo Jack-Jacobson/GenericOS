@@ -28,14 +28,6 @@ document.getElementById("clock").textContent = `${hours}:${minutes}:${seconds} $
 updateClock();
 setInterval(updateClock, 1000);
 
-// Boot screen fade out
-setTimeout (() => {
-const bootScreen = document.getElementById("boot-screen");
-if(bootScreen) {
-bootScreen.remove();
-}
-}, 3500);
-
 
 
 (function() {

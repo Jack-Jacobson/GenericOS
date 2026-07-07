@@ -56,6 +56,6 @@
     if (totalAssets === 0 ){
         minDisplayTime.then(finishBoot);
     } else {
-        Promise.all([Promise.all(assetsURLs.map(loadAsset)), minDisplayTime]).then(finishBoot);
+        Promise.all([Promise.all(assetsUrls.map(loadAsset)), minDisplayTime]).then(finishBoot);
     }
 })();
