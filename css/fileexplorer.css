@@ -1,0 +1,145 @@
+#fileexplorer-window {
+    position: absolute;
+    top: 90px;
+    left: 180px;
+    width: 650px;
+    height: 450px;
+    background: rgba(30, 30, 30, 0.97);
+    color: white;
+    border-radius: 8px;
+    padding: 0;
+    font-family: sans-serif;
+    user-select: none;
+    display: none;
+    z-index: 100;
+    box-sizing: border-box;
+    flex-direction: column;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    overflow: hidden;
+}
+#fileexplorer-window.maximized {
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: calc(100vh- 50px);
+    border-radius: 0;
+    cursor: default;
+}
+#fileexplorer-titleBar{
+    height: 30px;
+    background: rgba(0, 0, 0, 0.6);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-left: 8px;
+    padding-right: 8px;
+    cursor: grab;
+    box-sizing: border-box;
+}
+#fileexplorer-controls {
+    display: flex;
+    gap: 2px;
+}
+#fileexplorer-controls button {
+    background: transparent;
+    border: none;
+    color: white;
+    width: 24px;
+    height: 24px;
+    cursor: pointer;
+    font-size: 14px;
+}
+#fileexplorer-controls button:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 4px;
+}
+#fileexplorer-breadcrumb {
+    flex: 1;
+    background: #222;
+    border: 1px solid #444;
+    padding: 5px 10px;
+    font-size: 13px;
+    color: #ccc;
+    overflow-x: auto;
+    white-space: nowrap;
+}
+.fileexplorer-crumb {
+    cursor: pointer;
+    color: #6cb6ff;
+}
+.fileexplorer-crumb:hover {
+    text-decoration: underline;
+}
+.fileexplorer-crumb-sep {
+    color: #777;
+}
+#fileexplorer-view {
+    flex: 1;
+    display: flex;
+    flex-wrap: wrap;
+    align-content: flex-start;
+    gap: 10px;
+    padding: 15px;
+    background: #222;
+    overflow-y: auto;
+    box-sizing: border-box;
+}
+.fileexplorer-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 80px;
+    padding: 8px 4px;
+    border-radius: 6px;
+    cursor: pointer;
+    border: 1px solid transparent;
+}
+.fileexplorer-item:hover {
+    background: rgba(255, 255, 255, 0.08);
+}
+.fileexplorer-item.selected {
+    background: rgba(77, 163, 255, 0.6);
+    border: 1px solid rgba(77, 163, 255, 0.6);
+}
+.fileexplorer-item-label {
+    margin-top: 6px;
+    font-size: 12px;
+    text-align: center;
+    color: white;
+    word-break: break-word;
+    max-width: 76px;
+}
+#fileexplorer-icon-folder{
+    width: 42px;
+    height: 34px;
+    background: #e8c15a;
+    border-radius: 0 4px 4px 4px;
+    position: relative;
+}
+.fileexplorer-icon-folder:before {
+    content: "";
+    position: absolute;
+    top: -8px;
+    left: 0;
+    width: 20px;
+    height: 8px;
+    background: #e8c15a;
+    border-radius: 4px 4px 0 0;
+}
+.fileexplorer-icon-file {
+    width: 34px;
+    height: 42px;
+    background: #eee;
+    border-radius: 3px;
+    position: absolute;
+}
+.fileexplorer-icon-file::before {
+    content: "";
+    position: absolute;
+    top: 8px;
+    left: 6px;
+    width: 22px;
+    height: 2px;
+    background: #999;
+    box-shadow: 0 6px 0 #999, 0, 12px, 0 #999;
+}
