@@ -75,7 +75,7 @@
 
     function selectItem(id){
         selectedId = id;
-        document.querySelectorAll("#fileexporer-view .fileexplorer-item").forEach(el => {
+        document.querySelectorAll("#fileexplorer-view .fileexplorer-item").forEach(el => {
             el.classList.toggle("selected", el.dataset.id === id);
         });
     }
@@ -114,7 +114,7 @@
 
         items.forEach(item => {
             const el = document.createElement("div");
-            el.className = "fileexplorer-item" + (item.id === selectedId ? "selected" : "");
+            el.className = "fileexplorer-item" + (item.id === selectedId ? " selected" : "");
             el.dataset.id = item.id;
 
             const iconBox = document.createElement("div");
@@ -169,7 +169,7 @@
         }
         const name = prompt("Save as (include .txt):", "New File.txt");
         if(!name) return null;
-        const newfile ={ id: makeId(), name, type: "file", content: content };
+        const newFile ={ id: makeId(), name, type: "file", content: content };
         getCurrentFolder().children.push(newFile);
         currentOpenFile = newFile;
         saveFileSystem();
@@ -183,8 +183,6 @@
             currentOpenFile = null;
         });
     }
-
-    window
 
     viewArea.addEventListener("click", () => {
         selectItem(null);

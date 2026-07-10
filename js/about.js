@@ -48,6 +48,11 @@
             text: `Click "GenericOS" in the taskbar, or press Ctrl+Space, to open the Start Menu. Search for an app by name, or press Enter on anything else to search the web.`
         },
         {
+            icon: "assets/fileexplorer-icon.png",
+            title: "File Explorer",
+            text: `Browse a full folder structure in File Explorer. Double-click a folder to open it, or a .txt file to view it in Notepad. Use New Folder, New File, and Delete to manage your files - and Save in Notepad to write changes back.`
+        },
+        {
             icon: "assets/about-icon.png",
             title: "You're All Set!",
             text: `That covers the basics. You can reopen this tour anytime from the About icon on your desktop or the Start Menu.`
