@@ -10,22 +10,38 @@ This is one my first web-design projects. I wanted to learn how to maniuplate DO
 
 - Window Managment
     - All windows can be dragged, maximized, minimized, and close through responsive buttons in their headers. They also can be snapped to either side of the screen and maximized by being dragged to the top.
+- Customization
+    - All desktop icons can be dragged and snapped to a grid anywhere on screen
+    - Desktop background can be changed and customized to any image
 - System UI
     - Features a working taskbar, where you can open, minimize, and see what apps you have
+    - Functional boot screen to load all assets before fading into the OS
     - Features a live clock and power menu, where you can restart (reload the tab) and power off (close the tab).
+    - Start menu where you can search through existing apps and search the web (cntrl + space)
 - Applications
     - Notepad
         - Type out and store plain text
+        - Save the plain text to a file viewable and openable in the files app
     - Terminal
         - Enter realistic and reactive commands to get certain outputs
     - Minesweeper
         - Play the popular game of minesweeper! Fully working with three different difficultuies and random field generation.
+    - Browser
+        - Open any website in the browser, go back, and reload the page
+        - Please note that some major sites block their sites from being displayed in embeds, such as my browser
+    - About
+      - A tour of the OS that opens when you first load up the page
+    - File Explorer
+      - A integrated file explorer where you can create whole structures of folders and files, and then edit any .txt file in the notepad!
+      - Find the secret file and decode it for a suprise!
+- Continuity
+    - All changes are stored locally so they will remain regardless of reloading the tab or closing the browser 
 
 ![Demonstration of moving the minesweeper game around the screen](assets/readme/applicationDemonstration.gif)
 
 ## Architecture and Technical Information
 
-This project was written in HTML5, CSS3, and vanilla JavaScript. It is organized in to many seperate files. Each application has its own javascript and css file, where all styling and specific programming related to the app goes. The script is then called in the index.html file. System logic is also in its file, such as windowManager.js, which handle functions for moving the windows around the screen. Anything that handles overall OS features should be put outside of the application-specific JavaScript files. All assets, such as images and icons, are held in the assets folder to be referenced in the future.
+This project was written in HTML5, CSS3, and vanilla JavaScript. It is organized in to many seperate files. Each application has its own javascript and css file, where all styling and specific programming related to the app goes. The script is then called in the index.html file. System logic is also in its file, such as windowManager.js, which handle functions for moving the windows around the screen. Anything that handles overall OS features should be put outside of the application-specific JavaScript files such as in the misc.js file. All assets, such as images and icons, are held in the assets folder to be referenced in the future.
 
 ## Installation and Local Development
 
@@ -70,4 +86,4 @@ The website where it is hosted, [genericos.jackjacbson2011.com](https://os.jackj
 ## Future Roadmap
 While this is how the OS will remain for now, in the future I plan non making many more features, such as more games and apps. Bugs will be fixed as they are found, and any security or major issue will be fixed with haste. 
 
-Thank you for checking out my project, and while your here, check out my [portfolio](https://jackjacobson2011.com)! If you are seeing this from HackClub, shoot me a dm on slack for a suprise!
+Thank you for checking out my project, and while your here, check out my [portfolio](https://jackjacobson2011.com)! 
