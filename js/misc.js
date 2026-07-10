@@ -31,7 +31,7 @@ setInterval(updateClock, 1000);
 
 
 (function() {
-    const iconIds = ["notepad-icon", "terminal-icon", "browser-icon", "minesweeper-icon", "about-icon"];
+    const iconIds = ["notepad-icon", "terminal-icon", "browser-icon", "minesweeper-icon", "about-icon", "fileexplorer-icon"];
     const icons = iconIds.map(id => document.getElementById(id)).filter(Boolean);
 
     let draggedIcon = null;

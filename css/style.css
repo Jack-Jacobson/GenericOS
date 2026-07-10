@@ -290,3 +290,31 @@ body:not(.dragging) #about-icon:hover {
     background:rgba(54, 52, 52, 0.1);
     border: 1px solid rgba(255, 255, 255, 0.2);
 }
+#fileexplorer-icon {
+    position: absolute;
+    top: 520px;
+    left: 20px;
+    width: 80px;
+    padding: 10px;
+    color: white;
+    font-family: sans-serif;
+    font-size: 16px;
+    text-align: center;
+    cursor: pointer;
+    user-select: none;
+    background: transparent;
+    border-radius: 8px;
+    border: 1px solid transparent;
+    transition: background 0.15s ease, border 0.15s ease;
+}
+#fileexplorer-icon img {
+    width: 60px;
+    height: 60px;
+    display: block;
+    margin: 0 auto 5px auto;
+    z-index: 10;
+}
+body:not(.dragging) #fileexplorer-icon:hover {
+    background: rgba(54, 52, 52, 0.1);
+    border: 1px solide rgba(255, 255, 255, 0.2);
+}

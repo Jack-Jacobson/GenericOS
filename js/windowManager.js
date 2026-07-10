@@ -42,6 +42,7 @@
     attachDrag("minesweeper-window", "minesweeper-titleBar");
     attachDrag("browser-window", "browser-titleBar");
     attachDrag("about-window", "about-titleBar");
+    attachDrag("fileexplorer-window", "fileexplorer-titleBar");
     
     document.addEventListener("mousemove", (e) => {
         if (!isDragging || !activeWindow) return;
