@@ -145,7 +145,8 @@ terminalInput.addEventListener("keydown", (e) => {
 
     const responseLine = document.createElement("div");
     if (commands[command]) {
-        responseLine.innerHTML = commands[command];
+    const output = typeof commands[command] === "function" ? commands[command]() : commands[command];
+    responseLine.innerHTML = output;
     } else {
         responseLine.textContent = "Command not found, run 'help' for a list of commands";
     }
