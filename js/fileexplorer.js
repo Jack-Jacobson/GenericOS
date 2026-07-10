@@ -239,6 +239,7 @@
     fileExplorerCloseBtn.addEventListener("click", () => {
         fileExplorerWindow.style.display = "none";
         if (isMaximized) taskbar.classList.remove("solid");
+        window.removeFromTaskbar("taskbar-fileexplorer");
     });
 
     fileExplorerWindow.addEventListener("mousedown", () => {
