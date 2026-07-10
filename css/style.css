@@ -195,7 +195,7 @@ body:not(.dragging) #minesweeper-icon:hover {
     width: 0%;
     background: white;
     border-radius: 3px;
-    transition: width 02s ease-out;
+    transition: width 0.2s ease-out;
 }
 
 #taskbar-seperator,
@@ -316,5 +316,5 @@ body:not(.dragging) #about-icon:hover {
 }
 body:not(.dragging) #fileexplorer-icon:hover {
     background: rgba(54, 52, 52, 0.1);
-    border: 1px solide rgba(255, 255, 255, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.2);
 }

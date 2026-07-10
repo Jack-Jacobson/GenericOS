@@ -90,7 +90,7 @@
                 const sep = document.createElement("span");
                 sep.textContent = " / ";
                 sep.className = "fileexplorer-crumb-sep";
-                breadCrumbBar.appendChild(sep);
+                breadcrumbBar.appendChild(sep);
             }
         });
     }
@@ -99,7 +99,7 @@
         renderBreadCrumb();
         viewArea.innerHTML = "";
         
-        const fodler = getCurrentFolder();
+        const folder = getCurrentFolder();
         const items = [...folder.children].sort((a, b) => {
             if(a.type !== b.type) return a.type === "folder" ? -1 : 1;
             return a.name.localeCompare(b.name);
@@ -168,14 +168,14 @@
         renderView();
     });
     newFileBtn.addEventListener("click", () => {
-        const name = new prompt("New file name:", "New File.txt");
+        const name = prompt("New file name:", "New File.txt");
         if(!name) return;
         getCurrentFolder().children.push({ id: makeId(), name, type: "file", content: ""});
         saveFileSystem();
         renderView();
     });
     deleteBtn.addEventListener("click", () => {
-        if(!selected) return;
+        if(!selectedId) return;
         const folder = getCurrentFolder();
         folder.children = folder.children.filter(item => item.id !== selectedId);
         selectedId = null;

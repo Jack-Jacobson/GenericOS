@@ -21,7 +21,7 @@
     top: 0;
     left: 0;
     width: 100vw;
-    height: calc(100vh- 50px);
+    height: calc(100vh - 50px);
     border-radius: 0;
     cursor: default;
 }
@@ -57,6 +57,7 @@
     flex: 1;
     background: #222;
     border: 1px solid #444;
+    border-radius: 4px;
     padding: 5px 10px;
     font-size: 13px;
     color: #ccc;
@@ -109,7 +110,7 @@
     word-break: break-word;
     max-width: 76px;
 }
-#fileexplorer-icon-folder{
+.fileexplorer-icon-folder{
     width: 42px;
     height: 34px;
     background: #e8c15a;
@@ -131,7 +132,7 @@
     height: 42px;
     background: #eee;
     border-radius: 3px;
-    position: absolute;
+    position: relative;
 }
 .fileexplorer-icon-file::before {
     content: "";
@@ -141,5 +142,5 @@
     width: 22px;
     height: 2px;
     background: #999;
-    box-shadow: 0 6px 0 #999, 0, 12px, 0 #999;
+    box-shadow: 0 6px 0 #999, 0, 12px 0 #999;
 }
