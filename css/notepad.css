@@ -88,3 +88,7 @@
 #notepad-textarea:focus {
     background: rgba(60, 60, 60);
 }
+#save-btn {
+    width: 80px;
+    margin-right: 6px;
+}

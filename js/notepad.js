@@ -3,6 +3,8 @@
     // Notepad functionality
     const notepadIcon = document.getElementById("notepad-icon");
     const notepadWindow = document.getElementById("notepad-window");
+    const notepadTextArea = document.getElementById("notepad-textarea");
+    const saveBtn = document.getElementById("save-btn");
 
     notepadIcon.addEventListener("click", () => {
         notepadWindow.style.width = "600px";
@@ -109,5 +111,16 @@
 
     notepadWindow.addEventListener("mousedown", () => {
         window.bringToFront(notepadWindow);
+    });
+
+    saveBtn.addEventListener("click", () => {
+        if(!window.saveOpenFile) return;
+        const result = window.saveOpenFile(notepadTextArea.value)
+        if(result) {
+            document.getElementById("notepad-title").textContent = result.name;
+            const original = saveBtn.textContent;
+            alert("Saved!");
+            setTimeout(() => {saveBtn.textContent = original; }, 800)
+        }
     });
 })();

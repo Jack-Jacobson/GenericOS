@@ -147,13 +147,44 @@
         });
     }
 
+    let currentOpenFile = null;
+
     function openInNotepad(fileItem) {
         const notepadIcon = document.getElementById("notepad-icon");
-        const notepadTextarea = document.getElementById("notepad-textarea");
-        if (!notepadIcon || !notepadTextarea) return;
+        const notepadTextArea = document.getElementById("notepad-textarea");
+        const notepadTitle = document.getElementById("notepad-title");
+        if(!notepadIcon ||  !notepadTextArea ) return;
+        currentOpenFile = fileItem;
         notepadIcon.click();
-        notepadTextarea.value = fileItem.content || "";
+        notepadTextArea.value = fileItem.content || "";
+        if(notepadTitle) notepadTitle.textContent = fileItem.name;
     }
+
+    window.saveOpenFile = function(content) {
+        if(currentOpenFile) {
+            currentOpenFile.content = content;
+            saveFileSystem();
+            if(fileExplorerWindow.style.display !== "none") renderView();
+            return { name: currentOpenFile.name, isNew: false };
+        }
+        const name = prompt("Save as (include .txt):", "New File.txt");
+        if(!name) return null;
+        const newfile ={ id: makeId(), name, type: "file", content: content };
+        getCurrentFolder().children.push(newFile);
+        currentOpenFile = newFile;
+        saveFileSystem();
+        if(fileExplorerWindow.style.display !== "none") renderView();
+        return { name: newFile.name, isNew: true};
+    };
+
+    const notepadCloseBtnRef = document.getElementById("close-btn");
+    if (notepadCloseBtnRef) {
+        notepadCloseBtnRef.addEventListener("click", () => {
+            currentOpenFile = null;
+        });
+    }
+
+    window
 
     viewArea.addEventListener("click", () => {
         selectItem(null);
