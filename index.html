@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="css/browser.css">
     <link rel="stylesheet" href="css/startmenu.css">
     <link rel="stylesheet" href="css/about.css">
+    <link rel="stylesheet" herf="css/fileexplorer.css">
 </head>
 <body>
     <div id="desktop">
@@ -123,6 +124,23 @@
                 </div>
             </div>
         </div>
+        <div id="fileexplorer-window">
+            <div id="fileexplorer-controls">
+                <div id="fileexplorer-titleBar">
+                    <button id="fileexplorer-min-btn">-</button>
+                    <button id="fileexplorer-max-btn">[]</button>
+                    <button id="fileexplorer-close-btn">X</button>
+                </div>
+            </div>
+            <div id="fileexplorer-toolbar">
+                <button id="fileexplorer-back-btn">Back</button>
+                <div id="fileexplorer-breadcrumb"></div>
+                <button id="fileexplorer-new-folder-btn">New Folder</button>
+                <button id="fileexplorer-new-file-btn">New File</button>
+                <button id="fileexplorer-delete-btn">Delete</button>
+            </div>
+            <div id="fileexplorer-view"></div>
+        </div>
         <div id="notepad-icon" class="desktop-icon">
             <img src="assets/notepad-icon.png" />
             <div>Notepad</div>
@@ -145,6 +163,11 @@
         <div id="about-icon" class="desktop-icon">
             <img src="assets/about-icon.png" />
             <div>About</div>
+        </div>
+        
+        <div id="fileexplorer-icon" class="desktop-icon">
+            <img src= "assets/fileexplorer-icon.png" />
+            <div>Files</div>
         </div>
 
         <div id="taskbar">
@@ -176,6 +199,7 @@
     <script src="js/startmenu.js"></script>
     <script src="js/about.js"></script>
     <script src="js/bootloader.js"></script>
+    <script src="js/fileexplorer.js"></script>
 
 </body>
 </html>
