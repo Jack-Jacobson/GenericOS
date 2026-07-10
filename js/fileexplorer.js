@@ -73,6 +73,13 @@
         return currentPath[currentPath.length - 1];
     }
 
+    function selectItem(id){
+        selectedId = id;
+        document.querySelectorAll("#fileexporer-view .fileexplorer-item").forEach(el => {
+            el.classList.toggle("selected", el.dataset.id === id);
+        });
+    }
+
     function renderBreadCrumb() {
         breadcrumbBar.innerHTML = "";
         currentPath.forEach((folder, index) => {
@@ -107,7 +114,8 @@
 
         items.forEach(item => {
             const el = document.createElement("div");
-            el.className = "fileexplorer-item" + (item.id === selectedId ? " selected" : "");
+            el.className = "fileexplorer-item" + (item.id === selectedId ? "selected" : "");
+            el.dataset.id = item.id;
 
             const iconBox = document.createElement("div");
             iconBox.className = item.type === "folder" ? "fileexplorer-icon-folder" : "fileexplorer-icon-file";
@@ -121,11 +129,11 @@
 
             el.addEventListener("click", (e) => {
                 e.stopPropagation();
-                selectedId = item.id;
-                renderView();
+                selectItem(item.id);
             });
 
-            el.addEventListener("dblclick", () => {
+            el.addEventListener("dblclick", (e) => {
+                e.stopPropagation();
                 if(item.type === "folder") {
                     currentPath.push(item);
                     selectedId = null;
@@ -148,8 +156,7 @@
     }
 
     viewArea.addEventListener("click", () => {
-        selectedId = null;
-        renderView();
+        selectItem(null);
     });
 
     backBtn.addEventListener("click", () => {
