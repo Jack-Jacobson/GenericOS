@@ -214,6 +214,6 @@
                 maybeShowTour();
             }
         });
-        bootObserver.observe(document.body, { childList: true });
+        bootObserver.observe(document.body, { childList: true, subtree: true });
     }
 })();

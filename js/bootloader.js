@@ -62,6 +62,7 @@
                 bootScreen.remove();
             }, 600);
         }, 300);
+
     }
 
     updateProgress("Starting GenericOS...");
