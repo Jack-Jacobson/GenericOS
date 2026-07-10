@@ -1,11 +1,10 @@
 # GenericOS
 <span style="font-size: 21px;">A high-quality, open-source, enaging, vanilla "os" in a desktop environment. Interact with it live<a href="https://genericos.jackjacobson2011.com"> here.</a></span>
 
-![Desktop screenshot](assets/readme/showcase.png)
-
 ## Overview & Motivation
 This is one my first web-design projects. I wanted to learn how to maniuplate DOM and program verstaile applications in JavaScript so I made this interesting and createive project. The entire project was buily fully from scratch, documented in devlogs and on this Github page (see these devlogs and more at [it's HackClub page](https://stardance.hackclub.com/projects/6676)). 
 
+![Desktop Screenshot](assets/readme/showcase.png)
 ## Core Features
 
 - Window Managment
@@ -27,7 +26,7 @@ This is one my first web-design projects. I wanted to learn how to maniuplate DO
     - Minesweeper
         - Play the popular game of minesweeper! Fully working with three different difficultuies and random field generation.
     - Browser
-        - Open any website in the browser, go back, and reload the page
+        - Open any website in the browser, go back, reload the page, and open multiple tabs!
         - Please note that some major sites block their sites from being displayed in embeds, such as my browser
     - About
       - A tour of the OS that opens when you first load up the page
@@ -61,6 +60,9 @@ Now navigate to the project directory
 There are **two ways to view the project** and see how it responds as you edit the file. Both require both of the above steps completed.
 
 #### Starting a local development server (reccomended):
+
+Run the below in a terminal
+
 ```
 #Starts a development server at http://localhost:8000
 python3 -m http.server 8000
