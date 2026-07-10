@@ -144,3 +144,25 @@
     background: #999;
     box-shadow: 0 6px 0 #999, 0, 12px 0 #999;
 }
+#fileexplorer-toolbar {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    padding: 6px 10px;
+    background: rgba(40, 40, 40, 1);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.5);
+}
+
+#fileexplorer-toolbar button {
+    background: #444;
+    border: 1px solid #555;
+    color: white;
+    border-radius: 4px;
+    padding: 4px 10px;
+    cursor: pointer;
+    font-size: 12px;
+}
+#fileexplorer-toolbar button:hover {
+    background: #555;
+    border-color: #666;
+}
